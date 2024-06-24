@@ -1,0 +1,29 @@
+package configuration;
+
+public enum DataReferece {
+
+    FOLDER("DataFiles"),
+    FILE("Formate.txt"),
+    BREAK_LINE("\r\n"),
+    TAB("\t"),
+    DOUBLETAB("\t\t"),
+    LINE_SPACE_REGEX("(?m)^( {0,3})"),
+    SPLIT_REGEX("\\n"),
+    REGEX_A("(\\n)+"),
+    REGEX_B("(\\n\\s*){2,}"),
+    INDENT_REGEX("^(?!\\s*$)"),
+    REGEX_C("\n"),
+    SAMPLE_FOLDER("/samples"),
+    SAMPLE_FILE("/sample1.txt");
+
+
+    private final String nombre;
+
+    DataReferece(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+}

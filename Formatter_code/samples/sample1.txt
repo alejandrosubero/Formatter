@@ -1,0 +1,328 @@
+
+
+
+
+		@Override
+		public ProcessModel findByName( String name){
+				logger.info("Starting getProcess");
+		Process	processEntity = new Process();
+
+		Optional<Process> fileOptional1 = processrepository.findByName(name);
+		if(fileOptional1.isPresent()){
+
+		try {
+		processEntity = fileOptional1.get();
+		}catch(DataAccessException e){
+		e.printStackTrace();
+		}
+
+		}
+		return	processMapper.entityToPojo(processEntity);
+		}
+		@Override
+		public ProcessModel findByCreateDate( Date createDate){
+				logger.info("Starting getProcess");
+		Process	processEntity = new Process();
+
+		Optional<Process> fileOptional1 = processrepository.findByCreateDate(createDate);
+		if(fileOptional1.isPresent()){
+
+		try {
+		processEntity = fileOptional1.get();
+		}catch(DataAccessException e){
+		e.printStackTrace();
+		}
+
+		}
+		return	processMapper.entityToPojo(processEntity);
+		}
+		@Override
+		public ProcessModel findByUserCreate( String userCreate){
+				logger.info("Starting getProcess");
+		Process	processEntity = new Process();
+
+		Optional<Process> fileOptional1 = processrepository.findByUserCreate(userCreate);
+		if(fileOptional1.isPresent()){
+
+		try {
+		processEntity = fileOptional1.get();
+		}catch(DataAccessException e){
+		e.printStackTrace();
+		}
+
+		}
+		return	processMapper.entityToPojo(processEntity);
+		}
+		@Override
+		public ProcessModel findByProcesTitle( String procesTitle){
+				logger.info("Starting getProcess");
+		Process	processEntity = new Process();
+
+		Optional<Process> fileOptional1 = processrepository.findByProcesTitle(procesTitle);
+		if(fileOptional1.isPresent()){
+
+		try {
+		processEntity = fileOptional1.get();
+		}catch(DataAccessException e){
+		e.printStackTrace();
+		}
+
+		}
+		return	processMapper.entityToPojo(processEntity);
+		}
+		@Override
+		public ProcessModel findByState( String state){
+				logger.info("Starting getProcess");
+		Process	processEntity = new Process();
+
+		Optional<Process> fileOptional1 = processrepository.findByState(state);
+		if(fileOptional1.isPresent()){
+
+		try {
+		processEntity = fileOptional1.get();
+		}catch(DataAccessException e){
+		e.printStackTrace();
+		}
+
+		}
+		return	processMapper.entityToPojo(processEntity);
+		}
+		@Override
+		public ProcessModel findByProcesCode( String procesCode){
+				logger.info("Starting getProcess");
+		Process	processEntity = new Process();
+
+		Optional<Process> fileOptional1 = processrepository.findByProcesCode(procesCode);
+		if(fileOptional1.isPresent()){
+
+		try {
+		processEntity = fileOptional1.get();
+		}catch(DataAccessException e){
+		e.printStackTrace();
+		}
+
+		}
+		return	processMapper.entityToPojo(processEntity);
+		}
+		@Override
+		public ProcessModel findByVisible( Boolean visible){
+				logger.info("Starting getProcess");
+		Process	processEntity = new Process();
+
+		Optional<Process> fileOptional1 = processrepository.findByVisible(visible);
+		if(fileOptional1.isPresent()){
+
+		try {
+		processEntity = fileOptional1.get();
+		}catch(DataAccessException e){
+		e.printStackTrace();
+		}
+
+		}
+		return	processMapper.entityToPojo(processEntity);
+		}
+		@Override
+		public ProcessModel findByGlobal( Boolean global){
+				logger.info("Starting getProcess");
+		Process	processEntity = new Process();
+
+		Optional<Process> fileOptional1 = processrepository.findByGlobal(global);
+		if(fileOptional1.isPresent()){
+
+		try {
+		processEntity = fileOptional1.get();
+		}catch(DataAccessException e){
+		e.printStackTrace();
+		}
+
+		}
+		return	processMapper.entityToPojo(processEntity);
+		}
+		@Override
+		public ProcessModel findByActivo( Boolean activo){
+				logger.info("Starting getProcess");
+		Process	processEntity = new Process();
+
+		Optional<Process> fileOptional1 = processrepository.findByActivo(activo);
+		if(fileOptional1.isPresent()){
+
+		try {
+		processEntity = fileOptional1.get();
+		}catch(DataAccessException e){
+		e.printStackTrace();
+		}
+
+		}
+		return	processMapper.entityToPojo(processEntity);
+		}
+
+
+
+		@Override
+		public List<ProcessModel> getAllProcess(){
+				logger.info("execute> getAllProcessGet allProyect");
+		List<ProcessModel> listaProcess = new ArrayList<ProcessModel>();
+		processrepository.findAll().forEach(process -> listaProcess.add(processMapper.entityToPojo(process)));
+		return listaProcess;
+		}
+
+		@Override
+		public boolean saveProcess(Process process){
+		logger.info("Save Proyect");
+
+
+		try {
+		processrepository.save(process);
+						return true;
+		} catch (DataAccessException e) {
+		logger.error(" ERROR : " + e);
+		return false;
+		}
+		}
+
+
+		@Override
+		public boolean updateProcess(Process	process ){
+		logger.info("Update ENTITY");
+		boolean clave = false;
+		Process empre = processrepository.findById(process.getId_process()).get();
+		empre = process;
+
+		try {
+		processrepository.save(empre);
+								clave = true;
+		} catch (DataAccessException e) {
+		logger.error(" ERROR : " + e);
+		clave = false;
+		}
+
+		return clave;
+		}
+
+
+		@Override
+		public	ProcessModel findById( Long id){
+		return  processMapper.entityToPojo(processrepository.findById(id).get());
+		}
+
+
+		@Override
+		public boolean saveOrUpdateProcess(Process  process ){
+		logger.info("Update Proyect");
+		boolean clave = false;
+			Optional<Process> fileOptional2 = processrepository.findById(process.getId_process());
+		if (fileOptional2.isPresent()) {
+		clave = this.updateProcess(process);
+		logger.info(" is update");
+		} else {
+		clave = this.saveProcess(process);
+		logger.info(" is save");
+		}
+		return clave;
+		}
+
+
+		@Override
+		public List<ProcessModel> findByNameContaining(String	name){
+		logger.info("Execute Name Containing" );
+		List<ProcessModel> listaProcess = new ArrayList<ProcessModel>();
+		List<Process> listaSProcess = processrepository.findByNameContaining(name);
+		listaSProcess.forEach(processx -> listaProcess.add(processMapper.entityToPojo(processx)));
+		return listaProcess;
+		}
+
+
+		@Override
+		public List<ProcessModel> findByCreateDateContaining(Date	createdate){
+		logger.info("Execute CreateDate Containing" );
+		List<ProcessModel> listaProcess = new ArrayList<ProcessModel>();
+		List<Process> listaSProcess = processrepository.findByCreateDateContaining(createdate);
+		listaSProcess.forEach(processx -> listaProcess.add(processMapper.entityToPojo(processx)));
+		return listaProcess;
+		}
+
+
+		@Override
+		public List<ProcessModel> findByUserCreateContaining(String	usercreate){
+		logger.info("Execute UserCreate Containing" );
+		List<ProcessModel> listaProcess = new ArrayList<ProcessModel>();
+		List<Process> listaSProcess = processrepository.findByUserCreateContaining(usercreate);
+		listaSProcess.forEach(processx -> listaProcess.add(processMapper.entityToPojo(processx)));
+		return listaProcess;
+		}
+
+
+		@Override
+		public List<ProcessModel> findByProcesTitleContaining(String	procestitle){
+		logger.info("Execute ProcesTitle Containing" );
+		List<ProcessModel> listaProcess = new ArrayList<ProcessModel>();
+		List<Process> listaSProcess = processrepository.findByProcesTitleContaining(procestitle);
+		listaSProcess.forEach(processx -> listaProcess.add(processMapper.entityToPojo(processx)));
+		return listaProcess;
+		}
+
+
+		@Override
+		public List<ProcessModel> findByStateContaining(String	state){
+		logger.info("Execute State Containing" );
+		List<ProcessModel> listaProcess = new ArrayList<ProcessModel>();
+		List<Process> listaSProcess = processrepository.findByStateContaining(state);
+		listaSProcess.forEach(processx -> listaProcess.add(processMapper.entityToPojo(processx)));
+		return listaProcess;
+		}
+
+
+		@Override
+		public List<ProcessModel> findByProcesCodeContaining(String	procescode){
+		logger.info("Execute ProcesCode Containing" );
+		List<ProcessModel> listaProcess = new ArrayList<ProcessModel>();
+		List<Process> listaSProcess = processrepository.findByProcesCodeContaining(procescode);
+		listaSProcess.forEach(processx -> listaProcess.add(processMapper.entityToPojo(processx)));
+		return listaProcess;
+		}
+
+
+		@Override
+		public List<ProcessModel> findByVisibleContaining(Boolean	visible){
+		logger.info("Execute Visible Containing" );
+		List<ProcessModel> listaProcess = new ArrayList<ProcessModel>();
+		List<Process> listaSProcess = processrepository.findByVisibleContaining(visible);
+		listaSProcess.forEach(processx -> listaProcess.add(processMapper.entityToPojo(processx)));
+		return listaProcess;
+		}
+
+
+		@Override
+		public List<ProcessModel> findByGlobalContaining(Boolean	global){
+		logger.info("Execute Global Containing" );
+		List<ProcessModel> listaProcess = new ArrayList<ProcessModel>();
+		List<Process> listaSProcess = processrepository.findByGlobalContaining(global);
+		listaSProcess.forEach(processx -> listaProcess.add(processMapper.entityToPojo(processx)));
+		return listaProcess;
+		}
+
+
+		@Override
+		public List<ProcessModel> findByActivoContaining(Boolean	activo){
+		logger.info("Execute Activo Containing" );
+		List<ProcessModel> listaProcess = new ArrayList<ProcessModel>();
+		List<Process> listaSProcess = processrepository.findByActivoContaining(activo);
+		listaSProcess.forEach(processx -> listaProcess.add(processMapper.entityToPojo(processx)));
+		return listaProcess;
+		}
+
+
+		@Override
+		public List<ProcessModel> findByStageContaining(Stage	stages){
+		logger.info(" Execute Stage Containing ");
+		List<ProcessModel> listaProcess = new ArrayList<ProcessModel>();
+		for (ProcessModel	process : this.getAllProcess()) {
+		for (StageModel	stagesx : process.getstages()) {
+		if(stagesx.equals(stages)) {
+		listaProcess.add(process);
+		}
+		}
+		}
+		return listaProcess;
+
+		}
