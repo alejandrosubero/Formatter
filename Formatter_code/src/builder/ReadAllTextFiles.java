@@ -39,6 +39,21 @@ public class ReadAllTextFiles {
     }
 
 
+    public static File ReadSpecificFileReturnFile() {
+
+        String textFromFile ="";
+        // Define the folder path
+        String folderPath = workingDir + DataReferece.SAMPLE_FOLDER.getNombre();;
+        // Define the specific filename (replace with your desired filename)
+        String fileName = DataReferece.SAMPLE_FILE.getNombre();
+        // Create File objects for the folder and the specific file
+        File folder = new File(folderPath);
+        File file = new File(folder, fileName);
+        return file;
+    }
+
+
+
     public static String ReadSpecificFile() {
 
             String textFromFile ="";
@@ -57,7 +72,7 @@ public class ReadAllTextFiles {
             } else {
                 textFromFile ="Error: Folder not found or cannot be accessed.";
             }
-              System.out.println(textFromFile);
+//              System.out.println(textFromFile);
             return textFromFile;
         }
 
@@ -86,7 +101,7 @@ public class ReadAllTextFiles {
                     }
 
                     // Print the entire text of the file
-                    System.out.println(allText.toString());
+//                    System.out.println(allText.toString());
 
                 } catch (FileNotFoundException e) {
                     throw new RuntimeException(e);
