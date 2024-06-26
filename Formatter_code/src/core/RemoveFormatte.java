@@ -7,28 +7,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class RemoveFormatte {
+public class RemoveFormatte implements IBaseString{
 
     public static String start(String multiLineText) {
-        StringBuilder writeText = new StringBuilder();
-        StringBuilder writeText2 = new StringBuilder();
-        List<String> lineList = new ArrayList<>();
-        Scanner scanner = new Scanner(multiLineText);
 
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            lineList.add(line);
+        List<String> lineList = IBaseString.createList(multiLineText);
+        if(lineList != null && lineList.size()>0){
+            lineList.removeIf(String::isEmpty);
+            return remuveIndentation(lineList);
         }
-        scanner.close();
-
-        lineList.removeIf(String::isEmpty);
-        lineList.forEach(line -> writeText.append(line).append("\n"));
-        lineList.forEach(linetext -> writeText2.append(linetext.trim()).append("\n"));
-        String linesToText = writeText2.toString();
-        return linesToText;
+        return "";
     }
 
-// remove blank line
-// remove indexing
+
+    public static String remuveIndentation(List<String> lineList){
+        StringBuilder writeText2 = new StringBuilder();
+        lineList.forEach(linetext -> writeText2.append(linetext.trim()).append("\n"));
+       return writeText2.toString();
+    }
+
 }
 

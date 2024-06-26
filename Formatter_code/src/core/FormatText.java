@@ -14,10 +14,6 @@ public class FormatText {
     private static final String SPLIT_REGEX = "\\n";
 
 
-    public String reformatSpaceInOneLine(String text) {
-        return text.replaceAll(LINE_SPACE_REGEX, TAB);
-    }
-
 
     public String reformat(String text) {
 
