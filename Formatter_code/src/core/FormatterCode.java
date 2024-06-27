@@ -6,54 +6,125 @@ import java.util.List;
 public class FormatterCode implements IBaseString{
 
 
+    private static String newLine = IBaseString.createNewLine;
+
     public static String formatCode(String codeNoFornate) {
         StringBuilder codigoFormateado = new StringBuilder();
-
+        String beforeLine = null;
+        int indentationLevel = 0;
         List<String> codeTreeStructure = IBaseString.createList(codeNoFornate);
 
 
-        int indentationLevel = 0;
-        for (String linea : codeTreeStructure) {
+        for (int i=0; i < codeTreeStructure.size(); i++){
 
-            if (linea.startsWith("@Component") ||  linea.startsWith("@Service") || linea.startsWith("@Repository")){
+            String line = codeTreeStructure.get(i);
 
-
+            if( i == 0 && beforeLine == null){
+                beforeLine = line;
             }
 
-            if (linea.startsWith("@Override")){
-
-
+            if (line.contains("@Component") ||  line.contains("@Service") || line.contains("@Repository")
+                    || line.contains("interface") ||  line.contains("class")){
+                codigoFormateado.append(line).append(newLine);
             }
 
+            if (line.contains("@Override")){
+                indentationLevel = 2;
+                codigoFormateado.append(IBaseString.indentation(indentationLevel)).append(line).append(newLine);
+            }
 
-            if (linea.startsWith("{")) {
+            if(beforeLine.contains("@Override") && line.contains("{") &&
+                    (line.contains("private") || line.contains("public") || line.contains("protected"))){
+                indentationLevel = 2;
+                codigoFormateado.append(IBaseString.indentation(indentationLevel)).append(line).append(newLine);
+            } else if(line.contains("{")){
+                codigoFormateado.append(IBaseString.indentation(indentationLevel)).append(line).append(newLine);
                 indentationLevel++;
             }
 
-            // Disminuir sangría al salir de un bloque
-            if (linea.startsWith("}")) {
+            if (line.contains("}")) {
                 indentationLevel--;
+                codigoFormateado.append(IBaseString.indentation(indentationLevel)).append(line);
+
+                if( i < codeTreeStructure.size() && i+1 < codeTreeStructure.size() && codeTreeStructure.get(i+1).contains("@Override") ){
+                    codigoFormateado.append(newLine).append(newLine);
+                } if (i >= codeTreeStructure.size() ){
+                    codigoFormateado.append(newLine).append(newLine);
+                }else {
+                    codigoFormateado.append(newLine);
+                }
             }
+
+
+            if (!line.contains("@Component") && !line.contains("@Service") && !line.contains("@Repository") &&
+                    !line.contains("@Override") && !line.contains("{") && !line.contains("}") && beforeLine.contains("{")){
+                indentationLevel++;
+                codigoFormateado.append(IBaseString.indentation(indentationLevel)).append(line).append(newLine);
+
+            } else if (!line.contains("@Component") && !line.contains("@Service") && !line.contains("@Repository") &&
+                    !line.contains("@Override") && !line.contains("{") && !line.contains("}") && !beforeLine.contains("{")){
+                codigoFormateado.append(IBaseString.indentation(indentationLevel)).append(line).append(newLine);
+            }
+            beforeLine = line;
         }
 
 
+
+
+//        for (String line : codeTreeStructure) {
+//
+//            if(beforeLine == null){
+//                beforeLine = line;
+//            }
+//
+//            if (line.contains("@Component") ||  line.contains("@Service") || line.contains("@Repository")
+//            || line.contains("interface") ||  line.contains("class")){
+//                codigoFormateado.append(line).append(newLine);
+//            }
+//
+//            if (line.contains("@Override")){
+//                indentationLevel = 2;
+//                codigoFormateado.append(IBaseString.indentation(indentationLevel)).append(line).append(newLine);
+//            }
+//
+//            if(beforeLine.contains("@Override") && line.contains("{") &&
+//                    (line.contains("private") || line.contains("public") || line.contains("protected"))){
+//                indentationLevel = 2;
+//                codigoFormateado.append(IBaseString.indentation(indentationLevel)).append(line).append(newLine);
+//            } else if(line.contains("{")){
+//                    indentationLevel++;
+//                codigoFormateado.append(IBaseString.indentation(indentationLevel)).append(line).append(newLine);
+//            }
+//
+//            if (line.contains("}")) {
+//                indentationLevel--;
+//                codigoFormateado.append(IBaseString.indentation(indentationLevel)).append(line).append(newLine);
+//            }
+//
+//            if (!line.contains("@Component") &&
+//                    !line.contains("@Service") &&
+//                    !line.contains("@Repository") &&
+//                    !line.contains("@Override") &&
+//                    !line.contains("{") &&
+//                    !line.contains("}") && beforeLine.contains("{")
+//            ){
+//                indentationLevel++;
+//                codigoFormateado.append(IBaseString.indentation(indentationLevel)).append(line).append(newLine);
+//            }else if (!line.contains("@Component") &&
+//                    !line.contains("@Service") &&
+//                    !line.contains("@Repository") &&
+//                    !line.contains("@Override") &&
+//                    !line.contains("{") &&
+//                    !line.contains("}") && !beforeLine.contains("{")
+//            ){
+//                codigoFormateado.append(IBaseString.indentation(indentationLevel)).append(line).append(newLine);
+//            }
+//
+//           beforeLine = line;
+//        }
 
         return codigoFormateado.toString();
     }
-
-    public static String indentation(Integer indentationLevel){
-        StringBuilder indentation = new StringBuilder("");
-
-        if(indentationLevel > 0){
-            int index = 0;
-            while(index == indentationLevel){
-                    indentation.append("\t");
-                index++;
-            }
-        }
-       return indentation.toString();
-    }
-
 
 
 

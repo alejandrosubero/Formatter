@@ -7,7 +7,7 @@ import java.util.Scanner;
 public interface IBaseString {
 
 	public String pathSeparator = java.nio.file.FileSystems.getDefault().getSeparator();
-
+	public static String createNewLine = System.lineSeparator();
 
 
 	default public String stringEnsamble(List<String> stringPaths) {
@@ -28,6 +28,23 @@ public interface IBaseString {
 		scanner.close();
 		return lineList;
 	}
+
+
+	public static String indentation(Integer indentationLevel){
+		StringBuilder indentation = new StringBuilder();
+
+		if(indentationLevel > 0){
+			int index = 0;
+			while(index < indentationLevel) {
+				indentation.append("\t");
+				index++;
+			}
+		}
+		String response = indentation.toString();
+
+		return response;
+	}
+
 
 	default public String path(List<String> paths) {
 
