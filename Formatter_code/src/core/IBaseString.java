@@ -1,5 +1,7 @@
 package core;
 
+import utils.DataReferece;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -36,13 +38,12 @@ public interface IBaseString {
 		if(indentationLevel > 0){
 			int index = 0;
 			while(index < indentationLevel) {
-				indentation.append("\t");
+				indentation.append(DataReferece.TAB.getNombre());
 				index++;
 			}
 		}
-		String response = indentation.toString();
-
-		return response;
+//		String response = indentation.toString();
+		return indentation.toString();
 	}
 
 

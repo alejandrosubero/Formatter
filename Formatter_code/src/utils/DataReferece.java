@@ -1,4 +1,4 @@
-package configuration;
+package utils;
 
 public enum DataReferece {
 
@@ -14,8 +14,8 @@ public enum DataReferece {
     INDENT_REGEX("^(?!\\s*$)"),
     REGEX_C("\n"),
     SAMPLE_FOLDER("/samples"),
-    SAMPLE_FILE("/sample2.txt");
-
+    SAMPLE_FILE("/sample2.txt"),
+    OVERRIDE("@Override");
 
     private final String nombre;
 
