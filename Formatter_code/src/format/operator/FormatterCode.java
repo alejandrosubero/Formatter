@@ -1,7 +1,7 @@
-package core;
+package format.operator;
 
-import interfaces.IFormatter;
-import utils.DataReferece;
+import format.interfaces.IFormatter;
+import format.utils.DataReferece;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class FormatterCode extends RemoveFormatte implements IFormatter {
     }
 
     private String formatCode(String codeNoFornate) {
-        StringBuilder codigoFormateado = new StringBuilder();
+        StringBuffer codigoFormateado = new StringBuffer();
         String beforeLine = null;
         int indentationLevel = 0;
         List<String> codeTreeStructure = IBaseString.createList(codeNoFornate);

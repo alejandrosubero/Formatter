@@ -1,11 +1,6 @@
-package core;
+package format.operator;
 
-import builder.ReadAllTextFiles;
-
-import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class RemoveFormatte implements IBaseString {
 
@@ -19,14 +14,14 @@ public class RemoveFormatte implements IBaseString {
     }
 
     private String remuveIndentation(List<String> lineList){
-        StringBuilder writeText2 = new StringBuilder();
+        StringBuffer writeText2 = new StringBuffer();
         lineList.forEach(linetext -> writeText2.append(linetext.trim()).append(IBaseString.createNewLine));
        return writeText2.toString();
     }
 
     private String remuveSpaceDoubleInLine(String multiLineText){
 
-        StringBuilder writeText2 = new StringBuilder();
+        StringBuffer writeText2 = new StringBuffer();
 
         for (int i = 0; i < multiLineText.length(); i++) {
             char currentChar = multiLineText.charAt(i);

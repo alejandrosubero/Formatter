@@ -1,7 +1,7 @@
-import builder.ReadAllTextFiles;
-import formatter.Formatter;
-import utils.Constant;
-import utils.DataReferece;
+import format.builder.ReadAllTextFiles;
+import format.formatter.Formatter;
+import format.utils.Constant;
+import format.utils.DataReferece;
 
 
 public class Main {
@@ -15,4 +15,6 @@ public class Main {
 //        String codeFormatted = new Formatter().removeFormatte(multiLineText);
         System.out.println(codeFormatted);
     }
+
+
 }

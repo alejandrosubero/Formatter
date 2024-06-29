@@ -1,11 +1,10 @@
-package utils;
+package format.utils;
 
 public enum DataReferece {
 
     FOLDER("DataFiles"),
     FILE("Formate.txt"),
     BREAK_LINE("\r\n"),
-    TAB("\t"),
     DOUBLETAB("\t\t"),
     LINE_SPACE_REGEX("(?m)^( {0,3})"),
     SPLIT_REGEX("\\n"),
@@ -13,6 +12,7 @@ public enum DataReferece {
     REGEX_B("(\\n\\s*){2,}"),
     INDENT_REGEX("^(?!\\s*$)"),
     REGEX_C("\n"),
+    TAB("\t"),
     SAMPLE_FOLDER("/samples"),
     SAMPLE_FILE("/sample2.txt"),
     OVERRIDE("@Override");

@@ -1,6 +1,6 @@
-package core;
+package format.operator;
 
-import utils.DataReferece;
+import format.utils.DataReferece;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ public interface IBaseString {
 
 
 	default public String stringEnsamble(List<String> stringPaths) {
-		StringBuilder newString = new StringBuilder();
+		StringBuffer newString = new StringBuffer();
 		stringPaths.stream().forEach(path -> newString.append(path));
 		return newString.toString();
 	}
@@ -49,7 +49,7 @@ public interface IBaseString {
 
 	default public String path(List<String> paths) {
 
-		StringBuilder newPathBuilder = new StringBuilder();
+		StringBuffer newPathBuilder = new StringBuffer();
 
 		for (int i = 0; paths.size() > i; i++) {
 			if(i != 0 && i+1 != paths.size() && paths.get(i) != " ") {

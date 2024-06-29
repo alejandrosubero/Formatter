@@ -1,7 +1,7 @@
-package formatter;
+package format.formatter;
 
-import core.FormatterCode;
-import interfaces.IFormatter;
+import format.operator.FormatterCode;
+import format.interfaces.IFormatter;
 
 public class Formatter {
 

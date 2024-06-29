@@ -1,6 +1,4 @@
-package interfaces;
-
-import core.RemoveFormatte;
+package format.interfaces;
 
 public interface IFormatter {
 
