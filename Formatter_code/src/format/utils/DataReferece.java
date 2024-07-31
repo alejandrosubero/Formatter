@@ -15,6 +15,7 @@ public enum DataReferece {
     TAB("\t"),
     SAMPLE_FOLDER("/samples"),
     SAMPLE_FILE("/sample2.txt"),
+    SAMPLE_FILE2("/sample3.txt"),
     OVERRIDE("@Override");
 
     private final String nombre;
